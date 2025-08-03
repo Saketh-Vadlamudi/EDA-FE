@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Grocery - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght=700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #0f3460;
+            --accent-color: #ffffff;
+            --text-color: #f6f6f6;
+            --card-bg: #22223a;
+            --gradient-1: #0f3460;
+            --gradient-2: #1a1a2e;
+        }
+
+        body {
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding-top: 80px;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Global Styles --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            margin: 0 0 50px;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 15px 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-title {
+            color: var(--text-color);
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        /* --- Sign In Button Styles --- */
+        .sign-in {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: none;
+        }
+
+        .sign-in:hover {
+            background-color: var(--text-color);
+            color: var(--primary-color);
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* --- Hero Carousel --- */
+        .hero-carousel {
+            position: relative;
+            overflow: hidden;
+            height: 600px;
+            margin-top: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-inner {
+            display: flex;
+            height: 100%;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .carousel-inner::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 60px;
+            color: var(--text-color);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            scroll-snap-align: start;
+        }
+
+        .carousel-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .carousel-item-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .carousel-item h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-item p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        .carousel-nav button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 2rem;
+            padding: 5px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-nav .prev-button {
+            left: 20px;
+        }
+
+        .carousel-nav .next-button {
+            right: 20px;
+        }
+
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1.5px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.4);
+        }
+
+        .cta-button:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.6);
+        }
+
+        /* --- Why Choose Us Section --- */
+        .card-grid-wrapper {
+            position: relative;
+        }
+
+        .card-grid {
+            display: flex;
+            gap: 40px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 20px 0;
+            scrollbar-width: none;
+        }
+
+        .card-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .info-card {
+            flex: 0 0 300px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            max-width: 300px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            scroll-snap-align: start;
+        }
+
+        /* New Styles for the click highlight */
+        .info-card.active-card::before,
+        .info-card.active-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: all 0.4s ease;
+        }
+
+        .info-card.active-card::before {
+            left: 0;
+            border-radius: 12px 0 0 12px;
+        }
+
+        .info-card.active-card::after {
+            right: 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-card h3 {
+            font-size: 1.8rem;
+            margin: 20px 0 10px;
+            color: var(--primary-color);
+        }
+
+        .info-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon-wrapper img {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* --- Our Top Most Products Section --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 15px;
+            color: var(--text-color);
+        }
+
+        .product-info h3 {
+            font-size: 1.2rem;
+            margin: 0 0 8px;
+            font-weight: 700;
+        }
+
+        .product-info p {
+            color: #b0b0d0;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-top: 10px;
+        }
+
+        .cta-add-to-cart {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-add-to-cart:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            color: var(--text-color);
+            padding: 30px 0;
+            font-size: 16px;
+            background: var(--primary-color);
+            border-top: 5px solid var(--accent-color);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px;
+            }
+            .navbar-links {
+                margin-top: 15px;
+            }
+            .navbar-links a {
+                margin: 0 10px;
+            }
+            .hero-carousel {
+                height: 450px;
+            }
+            .carousel-item h1 {
+                font-size: 2.5rem;
+                white-space: normal;
+                word-wrap: break-word;
+            }
+            .carousel-item p {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card-grid {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+            }
+            .info-card {
+                flex: 0 0 260px;
+            }
+             .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="navbar-title">Online Groceries</div>
+        <div class="navbar-links">
+            <a href="#" class="sign-in">Sign In</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="hero-carousel" id="heroCarousel">
+            <div class="carousel-inner" id="heroCarouselInner">
+                <div class="carousel-item" style="background-image: url('https://images.pexels.com/photos/2733918/pexels-photo-2733918.jpeg')">
+                    <div class="carousel-item-content">
+                        <h1>Your Daily Dose of Freshness</h1>
+                        <p>Experience the new way of grocery shopping. Fresh, fast, and delivered with a smile, right to your doorstep.</p>
+                        <a href="#" class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url('https://media.istockphoto.com/id/453963935/photo/fruits-and-vegetables-at-city-market-in-riga.jpg?s=1024x1024&w=is&k=20&c=OXOLVs2xceQMFnsWe3ydMlNyWaaTR42BGg4HvdVBA44=')">
+                    <div class="carousel-item-content">
+                        <h1>Organic, Healthy, & Delicious</h1>
+                        <p>Browse our extensive range of high-quality organic products, hand-picked for your well-being.</p>
+                        <a href="#" class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url('https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')">
+                    <div class="carousel-item-content">
+                        <h1>High Quality, Low Prices</h1>
+                        <p>Enjoy great savings on your favorite brands without compromising on quality.</p>
+                        <a href="#" class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url('https://images.pexels.com/photos/349609/pexels-photo-349609.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')">
+                    <div class="carousel-item-content">
+                        <h1>Fast & Reliable Delivery</h1>
+                        <p>We bring your groceries right to your door, fast and with a smile, every single time.</p>
+                        <a href="#" class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+                 <div class="carousel-item" style="background-image: url('https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')">
+                    <div class="carousel-item-content">
+                        <h1>Everyday Essentials Delivered</h1>
+                        <p>From coffee to cleaning supplies, get all your daily necessities with a simple click.</p>
+                        <a href="#" class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button class="prev-button">&#10094;</button>
+                <button class="next-button">&#10095;</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="card-grid">
+                <div class="info-card">
+                    <div class="icon-wrapper">
+                        <img src="https://img.icons8.com/dusk/64/000000/leaf.png" alt="Quality Guaranteed Icon">
+                    </div>
+                    <h3>Quality Guaranteed</h3>
+                    <p>We hand-pick the freshest produce and guarantee the quality of every item you order.</p>
+                </div>
+                <div class="info-card">
+                    <div class="icon-wrapper">
+                        <img src="https://img.icons8.com/dusk/64/000000/delivery.png" alt="Fast Delivery Icon">
+                    </div>
+                    <h3>Fast Delivery</h3>
+                    <p>Our dedicated team ensures your groceries arrive at your doorstep swiftly and securely.</p>
+                </div>
+                <div class="info-card">
+                    <div class="icon-wrapper">
+                        <img src="https://img.icons8.com/dusk/64/000000/us-dollar-circled.png" alt="Great Value Icon">
+                    </div>
+                    <h3>Great Value</h3>
+                    <p>Enjoy competitive prices and exclusive deals, making healthy eating affordable for everyone.</p>
+                </div>
+                <div class="info-card">
+                    <div class="icon-wrapper">
+                        <img src="https://img.icons8.com/dusk/64/000000/customer-support.png" alt="Excellent Support">
+                    </div>
+                    <h3>Excellent Support</h3>
+                    <p>Our customer service team is always here to assist you with any questions or issues.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="background-color: rgba(0, 0, 0, 0.05);">
+            <h2 class="section-title">Our Top Most Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.pexels.com/photos/586615/pexels-photo-586615.jpeg" alt="Rice">
+                    </div>
+                    <div class="product-info">
+                        <h3>Rice</h3>
+                        <p>Premium long-grain basmati rice for aromatic meals.</p>
+                        <div class="product-price"> ₹ 200 / 2 kg</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.pexels.com/photos/31275834/pexels-photo-31275834.jpeg" alt="Sunflower oil">
+                    </div>
+                    <div class="product-info">
+                        <h3>Sunflower Oil</h3>
+                        <p>Pure and healthy cooking oil, perfect for everyday use.</p>
+                        <div class="product-price"> ₹ 180 / 1 L</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.pexels.com/photos/3693294/pexels-photo-3693294.jpeg" alt="Salt">
+                    </div>
+                    <div class="product-info">
+                        <h3>Salt</h3>
+                        <p>Essential for every kitchen, pure and fine.</p>
+                        <div class="product-price"> ₹ 20 / kg</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.pexels.com/photos/141815/pexels-photo-141815.jpeg" alt="Sugar">
+                    </div>
+                    <div class="product-info">
+                        <h3>Sugar</h3>
+                        <p>Pure and fine, and essential for every kitchen.</p>
+                        <div class="product-price">₹ 48 / kg</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.pexels.com/photos/4045568/pexels-photo-4045568.jpeg" alt="Eggs">
+                    </div>
+                    <div class="product-info">
+                        <h3>Eggs</h3>
+                        <p>Nutritious protein food.</p>
+                        <div class="product-price">₹ 7 / Egg</div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.pexels.com/photos/2878740/pexels-photo-2878740.jpeg" alt="Chocolates">
+                    </div>
+                    <div class="product-info">
+                        <h3>Chocolates</h3>
+                        <p>Delicious Chocolates.</p>
+                        <div class="product-price">₹ 200 </div>
+                    </div>
+                </div>
+                 <div class="product-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.pexels.com/photos/533280/pexels-photo-533280.jpeg" alt="Tomato">
+                    </div>
+                    <div class="product-info">
+                        <h3>Tomatos</h3>
+                        <p>Fresh vegetables</p>
+                        <div class="product-price">₹ 42 / kg</div>
+                    </div>
+                </div>
+                 <div class="product-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.pexels.com/photos/3735657/pexels-photo-3735657.jpeg" alt="Shampoos">
+                    </div>
+                    <div class="product-info">
+                        <h3>Shampoos</h3>
+                        <p>Clinic Plus Shampoos.</p>
+                        <div class="product-price">₹ 77 </div>
+                    </div>
+                </div>
+                 <div class="product-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg" alt="Perfume">
+                    </div>
+                    <div class="product-info">
+                        <h3>Perfumes</h3>
+                        <p>Fragrance and Perfumes</p>
+                        <div class="product-price">₹ 450</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        &copy; 2025 Online Grocery Management System. All rights reserved.
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Hero Carousel Logic ---
+        const heroCarouselInner = document.querySelector('#heroCarouselInner');
+        const heroPrevButton = document.querySelector('.carousel-nav .prev-button');
+        const heroNextButton = document.querySelector('.carousel-nav .next-button');
+        const infoCards = document.querySelectorAll('.info-card');
+
+        let heroCurrentSlide = 0;
+        const heroTotalSlides = heroCarouselInner.children.length;
+
+        heroNextButton.addEventListener('click', () => {
+            if (heroCurrentSlide === heroTotalSlides - 1) {
+                heroCarouselInner.scrollTo({
+                    left: 0,
+                    behavior: 'smooth'
+                });
+                heroCurrentSlide = 0;
+            } else {
+                heroCarouselInner.scrollBy({
+                    left: heroCarouselInner.clientWidth,
+                    behavior: 'smooth'
+                });
+                heroCurrentSlide++;
+            }
+        });
+
+        heroPrevButton.addEventListener('click', () => {
+            if (heroCurrentSlide === 0) {
+                const lastSlideOffset = (heroTotalSlides - 1) * heroCarouselInner.clientWidth;
+                heroCarouselInner.scrollTo({
+                    left: lastSlideOffset,
+                    behavior: 'smooth'
+                });
+                heroCurrentSlide = heroTotalSlides - 1;
+            } else {
+                heroCarouselInner.scrollBy({
+                    left: -heroCarouselInner.clientWidth,
+                    behavior: 'smooth'
+                });
+                heroCurrentSlide--;
+            }
+        });
+
+        // --- Why Choose Us click logic ---
+        infoCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove 'active-card' from all cards
+                infoCards.forEach(c => c.classList.remove('active-card'));
+                // Add 'active-card' to the clicked card
+                this.classList.add('active-card');
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
